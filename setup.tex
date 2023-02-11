@@ -1,26 +1,31 @@
-\documentclass[a4paper,14pt,draft]{article}
-\usepackage{extsizes}
+\documentclass[a4paper,14pt]{article}
+\usepackage{extsizes} % для размера 14
 \usepackage{cmap} % для кодировки шрифтов в pdf
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[english, russian]{babel}
+\usepackage[english, russian]{babel} % переносы
 \usepackage{graphicx} % для вставки картинок
-\usepackage{fontspec}
+\usepackage{fontspec} % шрифт Times
 \setmainfont{Times New Roman}
-\usepackage{indentfirst}
-\setlength{\parindent}{1.3cm}
-\usepackage{setspace}
-\onehalfspacing
-\frenchspacing
-\usepackage{geometry}
+\usepackage{indentfirst} % отступ первого абзаца
+\setlength{\parindent}{1.3cm} % отступ первой строки
+\usepackage[onehalfspacing]{setspace}% полуторный интервал
+\frenchspacing % пробел после двоеточия
+\usepackage{geometry} % поля
 \geometry{left=3cm}
 \geometry{right=1.5cm}
 \geometry{top=2cm}
 \geometry{bottom=2cm}
-\renewcommand{\labelitemi}{-}
-\addto\captionsrussian{
+\renewcommand{\labelitemi}{-} % тире в ненумерованных списках
+
+\addto\captionsrussian{ % заголовок содержания
   \renewcommand{\contentsname}%
     {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
 }
-%\renewcommand{\cftsecfont}{\normalsize\bfseries\MakeUppercase{\sectionname}}
-%\setcounter{secnumdepth}{2}
+
+\graphicspath{{images/}} % путь к изображениям
+\renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
+
+\addto\captionsrussian{ % подпись рисунка
+\def\figurename{Рисунок}
+}
