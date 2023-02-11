@@ -1,0 +1,26 @@
+\documentclass[a4paper,14pt,draft]{article}
+\usepackage{extsizes}
+\usepackage{cmap} % для кодировки шрифтов в pdf
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{graphicx} % для вставки картинок
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.3cm}
+\usepackage{setspace}
+\onehalfspacing
+\frenchspacing
+\usepackage{geometry}
+\geometry{left=3cm}
+\geometry{right=1.5cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+\renewcommand{\labelitemi}{-}
+\addto\captionsrussian{
+  \renewcommand{\contentsname}%
+    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
+}
+%\renewcommand{\cftsecfont}{\normalsize\bfseries\MakeUppercase{\sectionname}}
+%\setcounter{secnumdepth}{2}
