@@ -25,7 +25,45 @@
 
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
+\renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
 
-\addto\captionsrussian{ % подпись рисунка
-\def\figurename{Рисунок}
-}
+\usepackage{longtable}
+\usepackage[tableposition=top]{caption} % подпись таблицы вверху
+\captionsetup[table]{skip=0pt,singlelinecheck=off} % выравнивание слева, многострочность заголовка таблицы
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~--~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{labelformat=gosttable}
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+{\normalsize\bfseries}
+{\thesection}
+{1em}{}
+
+\titleformat{\subsection}
+{\normalsize\bfseries}
+{\thesubsection}
+{1em}{}
+
+\titleformat{\subsubsection}
+{\normalsize\bfseries}
+{\thesubsubsection}
+{1em}{}
+
+\titlespacing*{\section}{\parindent}{*2}{*2}
+\titlespacing*{\subsection}{\parindent}{*2}{*2}
+\titlespacing*{\subsubsection}{\parindent}{*2}{*2}
+
+\usepackage{array}
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{enumitem}
+\setlist{nolistsep}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
