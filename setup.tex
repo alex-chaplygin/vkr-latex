@@ -30,21 +30,21 @@
 \usepackage{longtable}
 \usepackage[tableposition=top]{caption} % подпись таблицы вверху
 \captionsetup[table]{skip=0pt,singlelinecheck=off} % выравнивание слева, многострочность заголовка таблицы
-\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
-\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
-\DeclareCaptionLabelSeparator{gost}{~--~}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2} %подпись рисунка
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2} %подпись таблицы
+\DeclareCaptionLabelSeparator{gost}{~--~} %разделитель в рисунках и таблицах
 \captionsetup{labelsep=gost}
 \captionsetup[figure]{labelformat=gostfigure}
 \captionsetup[table]{labelformat=gosttable}
 
 \usepackage{titlesec}
 
-\titleformat{\section}
+\titleformat{\section} %настройка заголовка раздела
 {\normalsize\bfseries}
 {\thesection}
 {1em}{}
 
-\titleformat{\subsection}
+\titleformat{\subsection}  %настройка заголовка подраздела
 {\normalsize\bfseries}
 {\thesubsection}
 {1em}{}
@@ -54,16 +54,19 @@
 {\thesubsubsection}
 {1em}{}
 
-\titlespacing*{\section}{\parindent}{*2}{*2}
+\titlespacing*{\section}{\parindent}{*2}{*2} % отступы разделов
 \titlespacing*{\subsection}{\parindent}{*2}{*2}
 \titlespacing*{\subsubsection}{\parindent}{*2}{*2}
 
-\usepackage{array}
+\usepackage{array} % новый вид колонки с выравниванием по центру
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{enumitem}
-\setlist{nolistsep}
+\setlist{nolistsep} % отключить отступы вокруг списков
 
-\setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\normalsize} % не жирный шрифт раздела в оглавлении
+\renewcommand{\cftsecpagefont}{\textmd} % не жирный номер страницы для раздела
+\setcounter{tocdepth}{4} % число уровней оглавления
+\setcounter{secnumdepth}{4} % число уровней подразделов
