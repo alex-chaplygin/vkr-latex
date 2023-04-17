@@ -1,4 +1,4 @@
-src=main.tex setup.tex intro.tex abstract.tex tz.tex domain.tex tp.tex
+src=main.tex setup.tex Введение.tex Реферат.tex ТехЗадание.tex Анализ.tex ТехПроект.tex ТитульныйЛист.tex ТитульныйЛистПрактика.tex Обозначения.tex РабочийПроект.tex Заключение.tex
 
 all: main.pdf
 
