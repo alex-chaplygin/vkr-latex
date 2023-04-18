@@ -12,6 +12,7 @@
 \usepackage[onehalfspacing]{setspace}% полуторный интервал
 \frenchspacing % пробел после двоеточия
 \usepackage{geometry} % поля
+\usepackage{float} % перенос текста после рисунков
 \geometry{left=3cm}
 \geometry{right=1.5cm}
 \geometry{top=2cm}
@@ -70,3 +71,27 @@
 \renewcommand{\cftsecpagefont}{\textmd} % не жирный номер страницы для раздела
 \setcounter{tocdepth}{4} % число уровней оглавления
 \setcounter{secnumdepth}{4} % число уровней подразделов
+
+\addto\captionsrussian{\def\refname{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} %заголовок списка литературы
+\makeatletter
+\renewcommand\@biblabel[1]{#1.} %оформление элемента списка литературы
+
+\renewenvironment{thebibliography}[1] %переопределение списка литературы, чтобы заголовок был не секцией
+     {\begin{center}\refname\end{center}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+
+
+\makeatother
