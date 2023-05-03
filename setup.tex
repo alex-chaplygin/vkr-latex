@@ -62,20 +62,21 @@
 {\thesection}
 {1em}{}
 
-\titleformat{\subsection}[hang]  %настройка заголовка подраздела
+\titleformat{\subsection}[block]  %настройка заголовка подраздела
 {\normalsize\bfseries}
-{\thesubsection}
+{\hspace{1.25cm}\thesubsection}
 {1em}{}
+\setlength\leftmarginii  {0pt}
 
 \titleformat{\subsubsection}[block]
 {\normalsize\bfseries}
-{\thesubsubsection}
+{\hspace{1.25cm}\thesubsubsection}
 {1em}{}
 
 \titlespacing*{name=\section,numberless}{0pt}{*2}{*2} % отступы разделов
 \titlespacing*{\section}{\parindent}{*2}{*2}
-\titlespacing*{\subsection}{\parindent}{*2}{*2}
-\titlespacing*{\subsubsection}{\parindent}{*2}{*2}
+\titlespacing*{\subsection}{0pt}{*2}{*2}
+\titlespacing*{\subsubsection}{0pt}{*2}{*2}
 
 \usepackage{array} % новый вид колонки с выравниванием по центру
 
