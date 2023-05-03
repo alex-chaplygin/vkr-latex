@@ -8,54 +8,72 @@
 \usepackage{fontspec} % шрифт Times
 \setmainfont{Times New Roman}
 \usepackage{indentfirst} % отступ первого абзаца
-\setlength{\parindent}{1.3cm} % отступ первой строки
-\usepackage[onehalfspacing]{setspace}% полуторный интервал
+\setlength{\parindent}{1.25cm} % отступ первой строки
+%\usepackage[onehalfspacing]{setspace}% полуторный интервал
+%\renewcommand{\baselinestretch}{1.5}
+\linespread{1.41}
 \frenchspacing % пробел после двоеточия
 \usepackage{geometry} % поля
 \usepackage{float} % перенос текста после рисунков
+\floatplacement{figure}{H}
 \geometry{left=3cm}
 \geometry{right=1.5cm}
 \geometry{top=2cm}
 \geometry{bottom=2cm}
 \renewcommand{\labelitemi}{-} % тире в ненумерованных списках
 
-\addto\captionsrussian{ % заголовок содержания
-  \renewcommand{\contentsname}%
-    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
-}
+\usepackage[hidelinks]{hyperref}
+
+%\addto\captionsrussian{ % заголовок содержания
+%  \renewcommand{\contentsname}%
+%    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
+%}
 
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
 \renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
 
 \usepackage{longtable}
+\usepackage{etoolbox}
 \usepackage[tableposition=top]{caption} % подпись таблицы вверху
-\captionsetup[table]{skip=0pt,singlelinecheck=off} % выравнивание слева, многострочность заголовка таблицы
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2} %подпись рисунка
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2} %подпись таблицы
 \DeclareCaptionLabelSeparator{gost}{~--~} %разделитель в рисунках и таблицах
 \captionsetup{labelsep=gost}
-\captionsetup[figure]{labelformat=gostfigure}
-\captionsetup[table]{labelformat=gosttable}
+\captionsetup[figure]{aboveskip=12pt,belowskip=10pt,labelformat=gostfigure}
+\BeforeBeginEnvironment{figure}{\addvspace{26pt}}%
+\captionsetup[table]{belowskip=12pt,aboveskip=12pt,singlelinecheck=off,labelformat=gosttable}
+\AfterEndEnvironment{longtable}{\addvspace{20pt}}%
+
+\captionsetup{strut=off}
+\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
+\setlength{\textfloatsep}{0pt} % Vertical space below (above) [t] ([b]) floats
+
 
 \usepackage{titlesec}
 
-\titleformat{\section} %настройка заголовка раздела
+\titleformat{name=\section,numberless}[block]
+{\normalsize\filcenter}
+{}
+{0pt}{}  %настройка ненумерованного раздела (Введение, содержание)
+
+\titleformat{\section}[block] %настройка заголовка раздела
 {\normalsize\bfseries}
 {\thesection}
 {1em}{}
 
-\titleformat{\subsection}  %настройка заголовка подраздела
+\titleformat{\subsection}[hang]  %настройка заголовка подраздела
 {\normalsize\bfseries}
 {\thesubsection}
 {1em}{}
 
-\titleformat{\subsubsection}
+\titleformat{\subsubsection}[block]
 {\normalsize\bfseries}
 {\thesubsubsection}
 {1em}{}
 
-\titlespacing*{\section}{\parindent}{*2}{*2} % отступы разделов
+\titlespacing*{name=\section,numberless}{0pt}{*2}{*2} % отступы разделов
+\titlespacing*{\section}{\parindent}{*2}{*2}
 \titlespacing*{\subsection}{\parindent}{*2}{*2}
 \titlespacing*{\subsubsection}{\parindent}{*2}{*2}
 
@@ -64,34 +82,51 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{enumitem}
-\setlist{nolistsep} % отключить отступы вокруг списков
+\setlist{nolistsep,wide=\parindent,leftmargin=1.25cm} % отступы вокруг списков, выравнивание с учетом разделителя
 
-\usepackage{tocloft}
+\usepackage[]{tocloft}
+\setlength{\cftbeforetoctitleskip}{-1em}
+\addto\captionsrussian{
+	\renewcommand\contentsname{}
+}
+\renewcommand{\cftdot}{} % убрать отточие
 \renewcommand{\cftsecfont}{\normalsize} % не жирный шрифт раздела в оглавлении
 \renewcommand{\cftsecpagefont}{\textmd} % не жирный номер страницы для раздела
 \setcounter{tocdepth}{4} % число уровней оглавления
 \setcounter{secnumdepth}{4} % число уровней подразделов
-
-\addto\captionsrussian{\def\refname{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} %заголовок списка литературы
+\def\secwidth{2.5em}
+\setlength{\cftsecnumwidth}{\secwidth}
+\setlength{\cftsubsecnumwidth}{\secwidth}
+\setlength{\cftsubsubsecnumwidth}{\secwidth}
+\setlength{\cftbeforesecskip}{1.5pt} % интервал между разделами содержания
+\setlength{\cftsecindent}{0pt}% Remove indent for \section
+\setlength{\cftsubsecindent}{0pt}% Remove indent for \subsection
+\setlength{\cftsubsubsecindent}{0pt}% Remove indent for \subsubsection
+%\addto\captionsrussian{\def\refname{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} %заголовок списка литературы
 \makeatletter
 \renewcommand\@biblabel[1]{#1.} %оформление элемента списка литературы
-
-\renewenvironment{thebibliography}[1] %переопределение списка литературы, чтобы заголовок был не секцией
-     {\begin{center}\refname\end{center}%
-      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
-      \list{\@biblabel{\@arabic\c@enumiv}}%
-           {\settowidth\labelwidth{\@biblabel{#1}}%
-            \leftmargin\labelwidth
-            \advance\leftmargin\labelsep
-            \@openbib@code
-            \usecounter{enumiv}%
-            \let\p@enumiv\@empty
-            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-      \sloppy
-      \clubpenalty4000
-      \@clubpenalty \clubpenalty
-      \widowpenalty4000%
-      \sfcode`\.\@m}
+\interlinepenalty=10000 %запрет переноса элемента на новую страницу
+\renewenvironment{thebibliography}[1]
+{\list{\@biblabel{\@arabic\c@enumiv}}%
+	{\settowidth\labelwidth{\@biblabel{#1}}%
+		\leftmargin\labelwidth
+		\setlength{\topsep}{0pt}                  
+		\setlength{\partopsep}{0pt}
+		\setlength{\itemsep}{0pt}
+		\setlength{\parsep}{0pt}
+		\advance\leftmargin\labelsep
+		\@openbib@code
+		\usecounter{enumiv}%
+		\let\p@enumiv\@empty
+		\renewcommand\theenumiv{\@arabic\c@enumiv}}%
+	\sloppy
+	\clubpenalty4000
+	\@clubpenalty \clubpenalty
+	\widowpenalty4000%
+	\sfcode`\.\@m}
+{\def\@noitemerr
+	{\@latex@warning{Empty `thebibliography' environment}}%
+	\endlist}
 
 
 \makeatother
