@@ -21,13 +21,12 @@
 \geometry{top=2cm}
 \geometry{bottom=2cm}
 \renewcommand{\labelitemi}{-} % тире в ненумерованных списках
-
 \usepackage[hidelinks]{hyperref}
 
 %\addto\captionsrussian{ % заголовок содержания
-%  \renewcommand{\contentsname}%
-%    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
-%}
+	%  \renewcommand{\contentsname}%
+	%    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
+	%}
 
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
@@ -40,10 +39,11 @@
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2} %подпись таблицы
 \DeclareCaptionLabelSeparator{gost}{~--~} %разделитель в рисунках и таблицах
 \captionsetup{labelsep=gost}
-\captionsetup[figure]{aboveskip=12pt,belowskip=10pt,labelformat=gostfigure}
-\BeforeBeginEnvironment{figure}{\addvspace{26pt}}%
-\captionsetup[table]{belowskip=12pt,aboveskip=12pt,singlelinecheck=off,labelformat=gosttable}
-\AfterEndEnvironment{longtable}{\addvspace{20pt}}%
+\captionsetup[figure]{aboveskip=10pt,belowskip=13.3pt,justification=centering,labelformat=gostfigure}
+\BeforeBeginEnvironment{figure}{\addvspace{27pt}}%
+\captionsetup[table]{belowskip=17.5pt,aboveskip=8.64pt,singlelinecheck=off,labelformat=gosttable}
+\AfterEndEnvironment{longtable}{\addvspace{24.4pt}}%
+
 
 \captionsetup{strut=off}
 \setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
@@ -59,7 +59,7 @@
 
 \titleformat{\section}[block] %настройка заголовка раздела
 {\normalsize\bfseries}
-{\thesection}
+{\hspace{1.25cm}\thesection}
 {1em}{}
 
 \titleformat{\subsection}[block]  %настройка заголовка подраздела
@@ -73,17 +73,17 @@
 {\hspace{1.25cm}\thesubsubsection}
 {1em}{}
 
-\titlespacing*{name=\section,numberless}{0pt}{*2}{*2} % отступы разделов
-\titlespacing*{\section}{\parindent}{*2}{*2}
-\titlespacing*{\subsection}{0pt}{*2}{*2}
-\titlespacing*{\subsubsection}{0pt}{*2}{*2}
-
+\def\toppad{2.57}
+\titlespacing*{name=\section,numberless}{0pt}{*\toppad}{*\toppad} % отступы разделов
+\titlespacing*{\section}{0pt}{*\toppad}{*\toppad}
+\titlespacing*{\subsection}{0pt}{*\toppad}{*\toppad}
+\titlespacing*{\subsubsection}{0pt}{*\toppad}{*\toppad}
 \usepackage{array} % новый вид колонки с выравниванием по центру
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{enumitem}
-\setlist{nolistsep,wide=\parindent,leftmargin=1.25cm} % отступы вокруг списков, выравнивание с учетом разделителя
+\setlist{nolistsep,wide=\parindent,itemindent=*} % отступы вокруг списков, выравнивание с учетом разделителя
 
 \usepackage[]{tocloft}
 \setlength{\cftbeforetoctitleskip}{-1em}
@@ -116,9 +116,8 @@
 		\setlength{\itemsep}{0pt}
 		\setlength{\parsep}{0pt}
 		\setlength{\parskip}{0pt}
-                \setlength{\itemindent}{1.75cm}
-                \setlength{\leftmargin}{0pt}
-		\advance\leftmargin\labelsep
+		\setlength{\itemindent}{1.75cm}
+		\setlength{\leftmargin}{0pt}
 		\@openbib@code
 		\usecounter{enumiv}%
 		\let\p@enumiv\@empty
