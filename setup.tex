@@ -20,13 +20,10 @@
 \geometry{right=1.5cm}
 \geometry{top=2cm}
 \geometry{bottom=2cm}
+\sloppy % увеличение отступов межлу словами в строке при невозможности переноса
+\usepackage[defaultlines=2,all]{nowidow} % абзац с новой страницы при нехватке места на заданное количество строк
 \renewcommand{\labelitemi}{-} % тире в ненумерованных списках
 \usepackage[hidelinks]{hyperref}
-
-%\addto\captionsrussian{ % заголовок содержания
-	%  \renewcommand{\contentsname}%
-	%    {\centerline{\normalsize\textmd{СОДЕРЖАНИЕ}}}%
-	%}
 
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
@@ -106,7 +103,6 @@
 %\addto\captionsrussian{\def\refname{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} %заголовок списка литературы
 \makeatletter
 \renewcommand\@biblabel[1]{#1.} %оформление элемента списка литературы
-\interlinepenalty=10000 %запрет переноса элемента на новую страницу
 \renewenvironment{thebibliography}[1]
 {\list{\@biblabel{\@arabic\c@enumiv}}%
 	{\settowidth\labelwidth{\@biblabel{#1}}%
@@ -124,6 +120,7 @@
 		\renewcommand\theenumiv{\@arabic\c@enumiv}}%
 	\sloppy
 	\clubpenalty4000
+	\interlinepenalty10000 %запрет переноса элемента на новую страницу
 	\@clubpenalty \clubpenalty
 	\widowpenalty4000%
 	\sfcode`\.\@m}
