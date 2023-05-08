@@ -20,7 +20,7 @@
 \geometry{right=1.5cm}
 \geometry{top=2cm}
 \geometry{bottom=2cm}
-\sloppy % увеличение отступов межлу словами в строке при невозможности переноса
+\sloppy % увеличение отступов между словами в строке при невозможности переноса
 \usepackage[defaultlines=2,all]{nowidow} % абзац с новой страницы при нехватке места на заданное количество строк
 \renewcommand{\labelitemi}{-} % тире в ненумерованных списках
 \usepackage[hidelinks]{hyperref}
@@ -70,11 +70,17 @@
 {\hspace{1.25cm}\thesubsubsection}
 {1em}{}
 
+\titleformat{\paragraph}[block]
+{\normalsize\bfseries}
+{\hspace{1.25cm}\theparagraph}
+{1em}{}
+
 \def\toppad{2.57}
 \titlespacing*{name=\section,numberless}{0pt}{*\toppad}{*\toppad} % отступы разделов
 \titlespacing*{\section}{0pt}{*\toppad}{*\toppad}
 \titlespacing*{\subsection}{0pt}{*\toppad}{*\toppad}
 \titlespacing*{\subsubsection}{0pt}{*\toppad}{*\toppad}
+\titlespacing*{\paragraph}{0pt}{*\toppad}{*\toppad}
 \usepackage{array} % новый вид колонки с выравниванием по центру
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -92,15 +98,24 @@
 \renewcommand{\cftsecpagefont}{\textmd} % не жирный номер страницы для раздела
 \setcounter{tocdepth}{4} % число уровней оглавления
 \setcounter{secnumdepth}{4} % число уровней подразделов
-\def\secwidth{2.5em}
+
+\def\secwidth{0pt}
 \setlength{\cftsecnumwidth}{\secwidth}
 \setlength{\cftsubsecnumwidth}{\secwidth}
 \setlength{\cftsubsubsecnumwidth}{\secwidth}
-\setlength{\cftbeforesecskip}{1.5pt} % интервал между разделами содержания
+\setlength{\cftparanumwidth}{\secwidth}
+\setlength{\cftbeforesecskip}{0pt} % интервал между разделами содержания
 \setlength{\cftsecindent}{0pt}% Remove indent for \section
 \setlength{\cftsubsecindent}{0pt}% Remove indent for \subsection
 \setlength{\cftsubsubsecindent}{0pt}% Remove indent for \subsubsection
-%\addto\captionsrussian{\def\refname{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} %заголовок списка литературы
+\setlength{\cftparaindent}{0pt}% Remove indent for \paragraph
+
+\def\secindent{3.3em}
+\renewcommand{\cftsecaftersnumb}{\hspace{\secindent}}
+\renewcommand{\cftsubsecaftersnumb}{\hspace{\secindent}}
+\renewcommand{\cftsubsubsecaftersnumb}{\hspace{\secindent}}
+\renewcommand{\cftparaaftersnumb}{\hspace{\secindent}}
+
 \makeatletter
 \renewcommand\@biblabel[1]{#1.} %оформление элемента списка литературы
 \renewenvironment{thebibliography}[1]
