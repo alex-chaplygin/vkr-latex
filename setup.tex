@@ -28,6 +28,7 @@
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
 \renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
+\newcommand{\newsection}{\clearpage\setcounter{figure}{0}\setcounter{table}{0}} % начало нового раздела 
 
 \usepackage{longtable}
 \usepackage{etoolbox}
@@ -145,3 +146,17 @@
 
 
 \makeatother
+
+\newcommand{\fillcenter}[2][\fill]{%
+	\lhrulefill{#1}%
+	\makebox[0pt]{#2}\lhrulefill{#1}}
+
+\newcommand{\fillleft}[2][\fill]{%
+	\underline{#2}\lhrulefill{#1}}
+
+\newcommand{\lhrulefill}[1]{%
+	\leavevmode
+	\leaders\hrule height -.67ex depth \dimexpr .67ex+.4pt\relax % define the leader
+	\hskip\glueexpr#1/2\relax\relax % how much it should extend
+	\kern0pt
+}
