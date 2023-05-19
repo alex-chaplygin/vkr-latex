@@ -163,6 +163,25 @@
 	{\@latex@warning{Empty `thebibliography' environment}}%
 	\endlist}
 
+\newsavebox\saved@arstrutbox 
+\newcommand*{\setarstrut}[1]{% команда для уменьшения высоты строки в таблице
+  \noalign{%
+    \begingroup
+      \global\setbox\saved@arstrutbox\copy\@arstrutbox
+      #1%
+      \global\setbox\@arstrutbox\hbox{%
+        \vrule \@height\arraystretch\ht\strutbox
+               \@depth\arraystretch \dp\strutbox
+               \@width\z@
+      }%
+    \endgroup
+  }%
+}
+\newcommand*{\restorearstrut}{% восстановление высоты строки
+  \noalign{%
+    \global\setbox\@arstrutbox\copy\saved@arstrutbox
+  }%
+}
 
 \makeatother
 
