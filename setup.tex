@@ -11,7 +11,8 @@
 \setlength{\parindent}{1.25cm} % отступ первой строки
 %\usepackage[onehalfspacing]{setspace}% полуторный интервал
 %\renewcommand{\baselinestretch}{1.5}
-\linespread{1.41}
+\def\onehalflinespread{1.41}
+\linespread{\onehalflinespread}
 \frenchspacing % пробел после двоеточия
 \usepackage{geometry} % поля
 \usepackage{float} % перенос текста после рисунков
@@ -23,30 +24,49 @@
 \sloppy % увеличение отступов между словами в строке при невозможности переноса
 \usepackage[defaultlines=2,all]{nowidow} % абзац с новой страницы при нехватке места на заданное количество строк
 \renewcommand{\labelitemi}{-} % тире в ненумерованных списках
-\usepackage[hidelinks]{hyperref}
 
 \graphicspath{{images/}} % путь к изображениям
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
 \renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
 \newcommand{\newsection}{\clearpage\setcounter{figure}{0}\setcounter{table}{0}} % начало нового раздела 
+\newcommand{\continuecaption}[1]{\caption*{#1}\addtocounter{table}{-1}\\ \hline }
+\newcommand{\centertocsection}[1]{\phantomsection\section*{#1}\addcontentsline{toc}{section}{#1} }
 
 \usepackage{longtable}
+%\usepackage{xltabular}
+%\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}} % пример объявления нового типа столбца с параметрами
+%\newcolumntype{T}{>{\centering\arraybackslash}X} % новый тип столбца T - автоматическая ширина столбца с выравниванием по центру
+%\newcommand{\centrow}{\centering\arraybackslash} % командой \centrow можно центрировать одну ячейку в столбце c заданной шириной, оставив в столбце другой тип выравнивания
 \usepackage{etoolbox}
+\usepackage{totcount}
+\newtotcounter{tablecnt}
+\newtotcounter{figurecnt}
+
+\def\toppad{4mm}
+\def\tablepreskip{17.5pt}
+\def\tablebelowskip{8.5pt}
+\def\figurepreskip{21.5pt}
+\def\figureaboveskip{10pt}
+\def\figurebelowskip{8.5pt}
+
+\setlength{\LTpre}{\tablepreskip}
+\setlength{\LTpost}{\tablebelowskip}
+
+%\AtBeginEnvironment{xltabular}{\stepcounter{tablecnt}\renewcommand{\arraystretch}{\onehalflinespread}\linespread{1.0}\selectfont}
+
+\AtBeginEnvironment{longtable}{\stepcounter{tablecnt}\vspace{5pt}}
+\AfterEndEnvironment{longtable}{\vspace{7pt}}
+
 \usepackage[tableposition=top]{caption} % подпись таблицы вверху
+\captionsetup{strut=off}
+\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
+\setlength{\textfloatsep}{0pt} % Vertical space below (above) [t] ([b]) floats
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2} %подпись рисунка
 \DeclareCaptionLabelFormat{gosttable}{Таблица #2} %подпись таблицы
 \DeclareCaptionLabelSeparator{gost}{~--~} %разделитель в рисунках и таблицах
 \captionsetup{labelsep=gost}
-\captionsetup[figure]{aboveskip=10pt,belowskip=13.3pt,justification=centering,labelformat=gostfigure}
-\BeforeBeginEnvironment{figure}{\addvspace{27pt}}%
-\captionsetup[table]{belowskip=17.5pt,aboveskip=8.64pt,singlelinecheck=off,labelformat=gosttable}
-\AfterEndEnvironment{longtable}{\addvspace{24.4pt}}%
-
-
-\captionsetup{strut=off}
-\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
-\setlength{\textfloatsep}{0pt} % Vertical space below (above) [t] ([b]) floats
-
+\captionsetup[figure]{aboveskip=\figureaboveskip,belowskip=\figurebelowskip,justification=centering,labelformat=gostfigure}
+\captionsetup[table]{skip=0pt,belowskip=0pt,aboveskip=0pt,singlelinecheck=off,labelformat=gosttable}
 
 \usepackage{titlesec}
 
@@ -76,12 +96,11 @@
 {\hspace{1.25cm}\theparagraph}
 {1em}{}
 
-\def\toppad{2.57}
-\titlespacing*{name=\section,numberless}{0pt}{*\toppad}{*\toppad} % отступы разделов
-\titlespacing*{\section}{0pt}{*\toppad}{*\toppad}
-\titlespacing*{\subsection}{0pt}{*\toppad}{*\toppad}
-\titlespacing*{\subsubsection}{0pt}{*\toppad}{*\toppad}
-\titlespacing*{\paragraph}{0pt}{*\toppad}{*\toppad}
+\titlespacing*{name=\section,numberless}{0pt}{\toppad}{\toppad} % отступы разделов
+\titlespacing*{\section}{0pt}{\toppad}{\toppad}
+\titlespacing*{\subsection}{0pt}{\toppad}{\toppad}
+\titlespacing*{\subsubsection}{0pt}{\toppad}{\toppad}
+\titlespacing*{\paragraph}{0pt}{\toppad}{\toppad}
 \usepackage{array} % новый вид колонки с выравниванием по центру
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -111,7 +130,7 @@
 \setlength{\cftsubsubsecindent}{0pt}% Remove indent for \subsubsection
 \setlength{\cftparaindent}{0pt}% Remove indent for \paragraph
 
-\def\secindent{3.3em}
+\def\secindent{3.8em}
 \renewcommand{\cftsecaftersnumb}{\hspace{\secindent}}
 \renewcommand{\cftsubsecaftersnumb}{\hspace{\secindent}}
 \renewcommand{\cftsubsubsecaftersnumb}{\hspace{\secindent}}
@@ -147,16 +166,99 @@
 
 \makeatother
 
+% Раскомментировать блок при необходимости использования страниц с альбомной ориентацией. Предпочтительнее их не использовать, а осуществлять поворт рисунков на 90 градусов.
+%
+%Пример использования:
+%
+%%\begin{albumpage}
+%%	\begin{figure}
+%	%		\centering
+%	%%		\vskip 1.0cm %способ добавить отступ, если необходимо
+%	%		\includegraphics[height=0.95\textheight]{img/precedents_common}
+%	%		\caption{Диаграмма прецедентов}
+%	%		\label{fig:precedentscommon}
+%	%	\end{figure}
+%%\end{albumpage}
+%
+%\newbool{onalbumpage}
+%\setbool{onalbumpage}{false}
+%\BeforeBeginEnvironment{figure}{%
+%	\ifbool{onalbumpage}{% true part:
+%	}{
+%		\stepcounter{figurecnt}\addvspace{\figurepreskip}
+%	}
+%}
+%
+%\usepackage{lscape}
+%\usepackage{pdflscape}
+%\usepackage{everypage}
+%
+%\newlength{\hfoot}
+%\newlength{\vfoot}
+%\AddEverypageHook{\ifdim\textwidth=\linewidth\relax
+%	\else\setlength{\hfoot}{-\topmargin}%
+%	\addtolength{\hfoot}{-\headheight}%
+%	\addtolength{\hfoot}{-\headsep}%
+%	\addtolength{\hfoot}{-.5\linewidth}%
+%	\ifodd\value{page}\setlength{\vfoot}{\oddsidemargin}%
+%	\else\setlength{\vfoot}{\evensidemargin}\fi%
+%	\addtolength{\vfoot}{\textheight}%
+%	\addtolength{\vfoot}{\footskip}%
+%	\raisebox{\hfoot}[0pt][0pt]{\rlap{\hspace{.981\vfoot}\rotatebox[origin=cB]{90}{\thepage}}}\fi}
+%
+%\newenvironment{albumpage}{
+%	\captionsetup[figure]{belowskip=0pt}
+%	\setbool{onalbumpage}{true}
+%%	\newgeometry{left=2cm,right=2cm,top=1.5cm,bottom=3cm}
+%	\begin{landscape}
+%		\pagestyle{empty}
+%}{
+%	\end{landscape}
+%	\pagestyle{plain}
+%%	\restoregeometry
+%	\setbool{onalbumpage}{false}
+%	\captionsetup[figure]{belowskip=\figurebelowskip}
+%}
+%
+% Закомментировать строку ниже
+%
+\BeforeBeginEnvironment{figure}{\stepcounter{figurecnt}\vspace{\figurepreskip}}
+
 \newcommand{\fillcenter}[2][\fill]{%
 	\lhrulefill{#1}%
 	\makebox[0pt]{#2}\lhrulefill{#1}}
-
+	
 \newcommand{\fillleft}[2][\fill]{%
 	\underline{#2}\lhrulefill{#1}}
-
+	
 \newcommand{\lhrulefill}[1]{%
 	\leavevmode
 	\leaders\hrule height -.67ex depth \dimexpr .67ex+.4pt\relax % define the leader
 	\hskip\glueexpr#1/2\relax\relax % how much it should extend
 	\kern0pt
 }
+
+\regtotcounter{page}
+
+% работа содержит \formbytotal{tablecnt}{рисун}{ок}{ка}{ков} % основа слова, окончания для согласования с 1 (рисун_ок), 2  (рисун_ка) и 5 (рисун_ков)
+\def\formbytotal#1#2#3#4#5{%
+	\newcount\c
+	\c \totvalue{#1}\relax
+	\newcount\last
+	\newcount\pnul
+	\last \c\relax
+	\divide \last 10
+	\pnul \last\relax
+	\divide\pnul 10
+	\multiply \pnul-10
+	\advance \pnul\last
+	\multiply \last-10
+	\advance \last\c
+	\total{#1}~#2%
+	\ifnum\pnul=1#5\else%
+	\ifcase\last#5\or#3\or#4\or#4\or#4\else#5\fi
+	\fi
+}
+
+%\usepackage{showframe} % show border
+\usepackage[hidelinks]{hyperref}
