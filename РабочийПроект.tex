@@ -2,15 +2,15 @@
 \section{Рабочий проект}
 \subsection{Классы, используемые при разработке сайта}
 
-Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблица \ref{class:table}).
+Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблица \ref{class:table}). Для таблицы используется пакет longtable c целью проверки совместимости между xltabular и longtable. Для новых таблиц предпочтительнее использовать пакет xltabular.
 
-\begin{longtable}[l]{|p{3cm}|p{3cm}|p{4cm}|p{4cm}|}
+\begin{longtable}[l]{|p{2.5cm}|p{2.5cm}|p{4.85cm}|p{4.85cm}|}
 \caption{Описание классов Bitrix, используемых в приложении\label{class:table}}\\
-\hline Название класса & Модуль, к которому относится класс & Описание класса & Методы \\
-\hline \centering 1 & \centering 2 & \centering 3 & 4\\
+\hline \centrow Название класса & \centrow Модуль, к которому относится класс & \centrow Описание класса & \centrow Методы \\
+\hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\
 \endfirsthead
 \caption*{Продолжение таблицы \ref{class:table}}\\
-\hline \centering 1 & \centering 2 & \centering 3 & 4\\
+\hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\
 \endhead
 \hline CMain & Главный модуль & CMain – главный класс страницы web-приложения. После одного из этапов по загрузке страницы в сценарии становится доступным инициализированный системой объект данного класса с именем \$APPLICATION & void ShowTitle(string property\_code = «title», bool strip\_tags = true)
 Выводит заголовок страницы
@@ -28,7 +28,7 @@ void ShowCSS(bool external = true, bool XhtmlStyle = true)
 
 На рисунке \ref{main:image} представлена главная страница сайта «Русатом – Аддитивные технологии».
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=1\linewidth]{main1}}
 \center{\includegraphics[width=1\linewidth]{main2}}
 \center{\includegraphics[width=1\linewidth]{main3}}
@@ -38,7 +38,7 @@ void ShowCSS(bool external = true, bool XhtmlStyle = true)
 
 На рисунке \ref{menu:image} представлен динамический вывод заголовков, включающий в себя искомые фразы при поиске фраз.
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=1\linewidth]{menu}}
 \caption{Динамический вывод заголовков}
 \label{menu:image}
@@ -46,7 +46,7 @@ void ShowCSS(bool external = true, bool XhtmlStyle = true)
 
 На рисунке \ref{enter:image} представлен ввод данных для публикации новости.
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=1\linewidth]{enter}}
 \caption{Ввод данных для публикации очень-очень длинной, интересной и полезной новости}
 \label{enter:image}

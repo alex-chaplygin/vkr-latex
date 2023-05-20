@@ -29,14 +29,17 @@
 \renewcommand{\thefigure}{\thesection.\arabic{figure}} % шаблон номера рисунков
 \renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
 \newcommand{\newsection}{\clearpage\setcounter{figure}{0}\setcounter{table}{0}} % начало нового раздела 
-\newcommand{\continuecaption}[1]{\caption*{#1}\addtocounter{table}{-1}\\ \hline }
+\newcommand{\continuecaption}[1]{\caption*{#1}\\ \hline }
 \newcommand{\centertocsection}[1]{\phantomsection\section*{#1}\addcontentsline{toc}{section}{#1} }
 
-\usepackage{longtable}
-%\usepackage{xltabular}
-%\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}} % пример объявления нового типа столбца с параметрами
-%\newcolumntype{T}{>{\centering\arraybackslash}X} % новый тип столбца T - автоматическая ширина столбца с выравниванием по центру
-%\newcommand{\centrow}{\centering\arraybackslash} % командой \centrow можно центрировать одну ячейку в столбце c заданной шириной, оставив в столбце другой тип выравнивания
+%\usepackage{longtable}
+\usepackage{xltabular}
+\usepackage{makecell}
+\renewcommand\theadfont{}
+\newcolumntype{T}{>{\centering\arraybackslash}X} % новый тип столбца T - автоматическая ширина столбца с выравниванием по центру
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X} % новый тип столбца R - автоматическая ширина столбца с выравниванием по правому краю
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % новый тип столбца C - фиксированная ширина столбца с выравниванием по центру
+\newcommand{\centrow}{\centering\arraybackslash} % командой \centrow можно центрировать одну ячейку (заголовок) в столбце типа X или p, оставив в оcтальных ячейках другой тип выравнивания
 \usepackage{etoolbox}
 \usepackage{totcount}
 \newtotcounter{tablecnt}
@@ -52,7 +55,7 @@
 \setlength{\LTpre}{\tablepreskip}
 \setlength{\LTpost}{\tablebelowskip}
 
-%\AtBeginEnvironment{xltabular}{\stepcounter{tablecnt}\renewcommand{\arraystretch}{\onehalflinespread}\linespread{1.0}\selectfont}
+\AtBeginEnvironment{xltabular}{\stepcounter{tablecnt}\renewcommand{\arraystretch}{\onehalflinespread}\linespread{1.0}\selectfont}
 
 \AtBeginEnvironment{longtable}{\stepcounter{tablecnt}\vspace{5pt}}
 \AfterEndEnvironment{longtable}{\vspace{7pt}}
@@ -66,7 +69,7 @@
 \DeclareCaptionLabelSeparator{gost}{~--~} %разделитель в рисунках и таблицах
 \captionsetup{labelsep=gost}
 \captionsetup[figure]{aboveskip=\figureaboveskip,belowskip=\figurebelowskip,justification=centering,labelformat=gostfigure}
-\captionsetup[table]{skip=0pt,belowskip=0pt,aboveskip=0pt,singlelinecheck=off,labelformat=gosttable}
+\captionsetup[table]{font={stretch=\onehalflinespread},skip=0pt,belowskip=0pt,aboveskip=8.5pt,singlelinecheck=off,labelformat=gosttable}
 
 \usepackage{titlesec}
 
@@ -102,8 +105,6 @@
 \titlespacing*{\subsubsection}{0pt}{\toppad}{\toppad}
 \titlespacing*{\paragraph}{0pt}{\toppad}{\toppad}
 \usepackage{array} % новый вид колонки с выравниванием по центру
-
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \usepackage{enumitem}
 \setlist{nolistsep,wide=\parindent,itemindent=*} % отступы вокруг списков, выравнивание с учетом разделителя
@@ -165,22 +166,22 @@
 
 \newsavebox\saved@arstrutbox 
 \newcommand*{\setarstrut}[1]{% команда для уменьшения высоты строки в таблице
-  \noalign{%
-    \begingroup
-      \global\setbox\saved@arstrutbox\copy\@arstrutbox
-      #1%
-      \global\setbox\@arstrutbox\hbox{%
-        \vrule \@height\arraystretch\ht\strutbox
-               \@depth\arraystretch \dp\strutbox
-               \@width\z@
-      }%
-    \endgroup
-  }%
+	\noalign{%
+		\begingroup
+		\global\setbox\saved@arstrutbox\copy\@arstrutbox
+		#1%
+		\global\setbox\@arstrutbox\hbox{%
+			\vrule \@height\arraystretch\ht\strutbox
+			\@depth\arraystretch \dp\strutbox
+			\@width\z@
+		}%
+		\endgroup
+	}%
 }
 \newcommand*{\restorearstrut}{% восстановление высоты строки
-  \noalign{%
-    \global\setbox\@arstrutbox\copy\saved@arstrutbox
-  }%
+	\noalign{%
+		\global\setbox\@arstrutbox\copy\saved@arstrutbox
+	}%
 }
 
 \makeatother
