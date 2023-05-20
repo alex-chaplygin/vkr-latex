@@ -34,9 +34,9 @@ JavaScript – объектно-ориентированный язык прог
 
 И еще:
 
-2 + \textquotedbl2\textquotedbl\ // -> 22
+2 + \textquotedbl 2\textquotedbl\ // -> 22
 
-2 - \textquotedbl2\textquotedbl\ // -> 0
+2 - \textquotedbl 2\textquotedbl\ // -> 0
 
 Это был пример раздела c нумерацией вида 1.1.1.1
 
@@ -44,7 +44,7 @@ JavaScript – объектно-ориентированный язык прог
 
 Диаграмма компонентов описывает особенности физического представления разрабатываемой системы. Она позволяет определить архитектуру системы, установив зависимости между программными компонентами, в роли которых может выступать как исходный, так и исполняемый код. Основными графическими элементами диаграммы компонентов являются компоненты, интерфейсы, а также зависимости между ними. На рисунке \ref{comp:image} изображена диаграмма компонентов для проектируемой системы. Она включает в себя сервер с операционной системой, на которой установлена система управления содержимым, включающая в себя базу данных и интерфейс. Помимо этого на диаграмме изображен клиентский компьютер с операционной системой, на которой установлен браузер.
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=1\linewidth]{comp}}
 \caption{Диаграмма компонентов}
 \label{comp:image}
@@ -54,7 +54,7 @@ JavaScript – объектно-ориентированный язык прог
 
 На рисунке \ref{data:image} представлена схема обмена данными между сценариями компонента при вызове компонента на странице сайта.
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=1\linewidth]{data}}
 \caption{Диаграмма компонентов}
 \label{data:image}
@@ -70,7 +70,7 @@ JavaScript – объектно-ориентированный язык прог
 
 Диаграмма размещения (рис.~\ref{place:image}) отражает физические взаимосвязи между программными и аппаратными компонентами системы.
 
-\begin{figure}[H]
+\begin{figure}
 \center{\includegraphics[width=0.37\linewidth]{place}}
 \caption{Диаграмма размещения}
 \label{place:image}
@@ -78,57 +78,70 @@ JavaScript – объектно-ориентированный язык прог
 
 Она является хорошим средством для показа маршрутов перемещения объектов и компонентов в распределенной системе.
 
+В таблице \ref{ssevsws:table} приведен пример использования пакета xltabular с автоматическим расчетом ширины столбца.
+
+\begin{xltabular}{\textwidth}{|c|X|X|}
+	\caption{Сравнение протоколов SSE и WebSocket\label{ssevsws:table}}\\ \hline
+	~  & \centrow SSE & \centrow WebSocket \\ \hline
+	\endfirsthead
+	\continuecaption{Продолжение таблицы \ref{ssevsws:table}}
+	~ & \centrow SSE & \centrow WebSocket \\ \hline 
+	\endhead
+	
+	Направленность & 
+	Однонаправленный, полудуплексный: данные посылает только сервер & 
+	Двунаправленный, полнодуплексный: и сервер, и клиент могут обмениваться сообщениями \\ \hline 
+	Соединение  & HTTP & WS \\ \hline 
+	Тип данных & Только текст & Бинарные и текстовые данные \\ \hline 
+	Доп. возможности & Встроенный механизм идентификаторов событий и переподключения & Переподключение и идентификация события реализуются на стороне приложения \\ \hline 
+\end{xltabular}
+
 \subsection{Содержание информационных блоков. Основные сущности}
 
 Проанализировав требования, можно выделить шесть основных сущностей:
 \begin{itemize}
-\item ``Новости'';
-\item ``Продукция'';
-\item ``Услуги''.
+\item "<Новости">;
+\item "<Продукция">;
+\item "<Услуги">.
 \end{itemize}
 
-В состав сущности ``Новости'' можно включить атрибуты, представленные в таблице \ref{news:table}.
+В состав сущности "<Новости"> можно включить атрибуты, представленные в таблице \ref{news:table}.
 
-\begin{longtable}[l]{|C{7.5cm}|C{3.5cm}|C{3.5cm}|}
-\caption{Атрибуты сущности ``Новости''\label{news:table}}\\
-\hline Поле & Тип & Обязательное \\
-\hline 1 & 2 & 3 \\
-\endfirsthead
-\caption*{Продолжение таблицы \ref{news:table}}\\
-\hline 1 & 2 & 3 \\
-\endhead
-  \hline ID & string & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline
-\end{longtable}
+\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
+	\caption{Атрибуты сущности "<Новости">\label{news:table}}\\ \hline
+	\thead{Поле} & \thead{Тип} & \thead{Обяза-\\тельное} & \thead{Описание} \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \thead{4} \\ \hline
+	\endfirsthead
+	\continuecaption{Продолжение таблицы \ref{news:table}}
+	\thead{1} & \thead{2} & \thead{3} & \thead{4} \\ \hline
+	\endhead
+	\_id & ObjectId & true & Уникальный идентификатор \\ \hline 
+	head & String & true & Заголовок новости \\ \hline 
+	short & String & false & Аннотация к новости \\ \hline 
+	createdAt & Date & true & Время создания новости \\ \hline 
+	author & String & false & Автор новости \\ \hline 
+	content & String & true & Текст новости \\ \hline 
+	views & Integer & true & Количество просмотров новости зарегистрированными пользователями \\ \hline 
+\end{xltabular}
 
-В состав сущности ``Продукция'' и ``Услуги'' можно включить атрибуты, представленные в таблице \ref{prod:table}.
-\begin{longtable}[l]{|C{7.5cm}|C{3.5cm}|C{3.5cm}|}
-\caption{Атрибуты сущности ``Продукция'' и ``Услуги''\label{prod:table}}\\
-\hline Поле & Тип & Обязательное \\
-\endfirsthead
-\caption*{Продолжение таблицы \ref{prod:table}}\\
-\hline Поле & Тип & Обязательное \\
-\endhead
-  \hline ID & string & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline Активность & char & true \\
-  \hline
-\end{longtable}
+Пример использования различных типов столбцов представлен в таблице \ref{prod:table}. Рекомендуется использовать пакет xltabular для создания таблиц.
+
+\begin{xltabular}{\textwidth}{|R|C{2.5cm}|l|T|}
+	\caption{Атрибуты  сущности "<Новости разметки в LaTeX"> с использованием различных типов столбцов и многострочным заголовком\label{prod:table}}\\ \hline
+	\thead{Поле} & \thead{Тип} & \thead{Обяза-\\тельное} & \thead{Описание} \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \thead{4} \\ \hline
+	\endfirsthead
+	\continuecaption{Продолжение таблицы \ref{prod:table}}
+	\thead{1} & \thead{2} & \thead{3} & \thead{4} \\ \hline
+	\endhead
+	\_id & ObjectId & true & Уникальный идентификатор \\ \hline 
+	head & String & true & Заголовок новости \\ \hline 
+	short & String & false & Аннотация к новости \\ \hline 
+	createdAt & Date & true & Время создания новости \\ \hline 
+	author & String & false & Автор новости \\ \hline 
+	content & String & true & Текст новости \\ \hline 
+	views & Integer & true & Количество просмотров новости зарегистрированными пользователями \\ \hline 
+\end{xltabular}
 
 В системе предусмотрен внутренний механизм связи между разделами и элементами информационных блоков, поэтому введения дополнительных идентификаторов при реализации связей между сущностями не предполагается.
 
