@@ -11,7 +11,7 @@
 \endfirsthead
 \caption*{Продолжение таблицы \ref{class:table}}\\
 \hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\
-\endhead
+\finishhead
 \hline CMain & Главный модуль & CMain – главный класс страницы web-приложения. После одного из этапов по загрузке страницы в сценарии становится доступным инициализированный системой объект данного класса с именем \$APPLICATION & void ShowTitle(string property\_code = «title», bool strip\_tags = true)
 Выводит заголовок страницы
 void SetTitle(string title)
@@ -20,9 +20,9 @@ void SetTitle(string title)
 void ShowCSS(bool external = true, bool XhtmlStyle = true)
 Выводит таблицу стилей CSS страницы\\
 \hline CFile & Главный модуль & CFile – Класс для работы с файлами и изображениями & array GetFileArray (int file\_id)
-Метод возвращает массив, содержащий описание файла (путь к файлу, имя файла, размер) с идентификатором file\_id\\
-  \hline
+Метод возвращает массив, содержащий описание файла (путь к файлу, имя файла, размер) с идентификатором file\_id
 \end{longtable}
+\vspace{-\tablebelowskip}
 
 \subsection{Тестирование разработанного web-сайта}
 
