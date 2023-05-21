@@ -24,7 +24,31 @@ void ShowCSS(bool external = true, bool XhtmlStyle = true)
 \end{longtable}
 \vspace{-\tablebelowskip}
 
-\subsection{Тестирование разработанного web-сайта}
+\subsection{Модульное тестирование разработанного web-сайта}
+
+Модульный тест для класса User из модели данных:
+
+\begin{lstlisting}[language=Python]
+from django.test import TestCase
+from .models import *
+User = get_user_model()
+
+
+class ShpoTestCases(TestCase):
+
+    def setUp(self) -> None:
+        self.user = User.objects.create(username='testtestovich', password='testtestovich', first_name='Sad', last_name='')
+
+    def test_2(self):
+
+        self.assertEqual(self.user.first_name, 'Sad')
+        self.assertEqual(self.user.last_name, 'Cat')
+        print((self.user))
+        print((self.user.first_name))
+        print((self.user.last_name))
+\end{lstlisting}
+
+\subsection{Системное тестирование разработанного web-сайта}
 
 На рисунке \ref{main:image} представлена главная страница сайта «Русатом – Аддитивные технологии».
 
