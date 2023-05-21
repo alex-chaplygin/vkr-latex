@@ -26,8 +26,9 @@ void ShowCSS(bool external = true, bool XhtmlStyle = true)
 
 \subsection{Модульное тестирование разработанного web-сайта}
 
-Модульный тест для класса User из модели данных:
+Модульный тест для класса User из модели данных представлен на рисунке \ref{unitUser:image}.
 
+\begin{figure}
 \begin{lstlisting}[language=Python]
 from django.test import TestCase
 from .models import *
@@ -47,6 +48,9 @@ class ShpoTestCases(TestCase):
         print((self.user.first_name))
         print((self.user.last_name))
 \end{lstlisting}
+\caption{Модульный тест класса User}
+\label{unitUser:image}
+\end{figure}
 
 \subsection{Системное тестирование разработанного web-сайта}
 
