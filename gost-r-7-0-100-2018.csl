@@ -82,21 +82,42 @@
 	
   <locale xml:lang="en">
     <terms>
-      <term name="et-al"> [et al.]</term>
+      <term name="et-al"> [и др.]</term>
       <term name="and others"/>
-      <term name="page" form="short">p.</term>
-      <term name="number-of-pages" form="short">p.</term>
-      <term name="number-of-volumes" form="short">vols.</term>
+      <term name="page" form="short">с.</term>
+      <term name="number-of-pages" form="short">с.</term>
+      <term name="number-of-volumes" form="short">т.</term>
       <term name="note" form="long"/>
       <term name="note" form="short"/>
-      <term name="collection-editor" form="short">coll.</term>
-      <term name="editortranslator" form="short">
-        <single>ed. &amp; trans.</single>
-        <multiple>eds. &amp; trans.</multiple>
-      </term>
+      <term name="collection-editor" form="short">сост.</term>
+      <term name="collection-number" form="short">вып.</term>
+      <term name="isbn" form="long">ISBN</term>
       <term name="available at" form="short">URL</term>
-      <term name="accessed" form="long">date accessed</term>
-      <term name="online" form="long">text : electronic</term>
+      <term name="accessed" form="long">дата обращения</term>
+      <term name="site" form="long">сайт</term>
+      <term name="online" form="long">текст : электронный</term>
+      <term name="offline" form="long">текст : непосредственный</term>
+      <term name="translator" form="short">
+        <single>пер.</single>
+        <multiple>пер.</multiple>
+      </term>
+      <term name="editortranslator" form="short">
+        <single>ред. и пер.</single>
+        <multiple>ред. и пер.</multiple>
+      </term>
+	        <!-- SHORT MONTH FORMS -->
+      <term name="month-01" form="short">янв.</term>
+      <term name="month-02" form="short">февр.</term>
+      <term name="month-03" form="short">марта</term>
+      <term name="month-04" form="short">апр.</term>
+      <term name="month-05" form="short">мая</term>
+      <term name="month-06" form="short">июня</term>
+      <term name="month-07" form="short">июля</term>
+      <term name="month-08" form="short">авг.</term>
+      <term name="month-09" form="short">сент.</term>
+      <term name="month-10" form="short">окт.</term>
+      <term name="month-11" form="short">нояб.</term>
+      <term name="month-12" form="short">дек.</term>
     </terms>
   </locale>
   <locale xml:lang="ru">
@@ -110,9 +131,12 @@
       <term name="note" form="short"/>
       <term name="collection-editor" form="short">сост.</term>
       <term name="collection-number" form="short">вып.</term>
+      <term name="isbn" form="long">ISBN</term>
       <term name="available at" form="short">URL</term>
       <term name="accessed" form="long">дата обращения</term>
+      <term name="site" form="long">сайт</term>
       <term name="online" form="long">текст : электронный</term>
+      <term name="offline" form="long">текст : непосредственный</term>
       <term name="translator" form="short">
         <single>пер.</single>
         <multiple>пер.</multiple>
@@ -195,7 +219,7 @@
     <names variable="author" suffix=". ">
       <!-- Добавить запятую между фамилией и инициалами автора: sort-separator=",&#160;", иначе sort-separator="&#160;" -->
       <!-- Сделать шрифт фамилий и инициалов авторов наклонным: font-style="italic", иначе font-style="normal" -->
-      <name et-al-min="2" et-al-use-first="1" suppress-min="4" initialize-with=". " font-style="normal" name-as-sort-order="first" sort-separator="&#160;"/>
+      <name et-al-min="2" et-al-use-first="1" suppress-min="4" initialize-with=". " font-style="normal" name-as-sort-order="first" sort-separator=",&#160;"/>
       <et-al term="and others"/>
     </names>
     <text variable="title"/>
@@ -312,6 +336,17 @@
       </if>
     </choose>
   </macro>
+  <macro name="offline">
+	<text term="offline" text-case="capitalize-first"/>
+  </macro>  
+  <macro name="ISBN">
+    <choose>
+	  <if variable="ISBN">
+        <label variable="isbn" form="long" prefix="" suffix=" " text-case="capitalize-all"/>
+		<text variable="ISBN"/>
+      </if>
+    </choose>
+  </macro>
 <!--_______________________________________________________________________________
 
     ______________________________ ССЫЛКИ В ТЕКСТЕ ________________________________
@@ -367,7 +402,7 @@
     _______________________________________________________________________________ -->
 
   <macro name="bibliography">
-    <text macro="citation-number"/>
+    <!--<text macro="citation-number"/>-->
     <choose>
 <!--_______________________________________________________________________________
     _______________ КНИГА (в т.ч. многотомник или отдельный том, а также __________
@@ -387,13 +422,15 @@
             </group>
             <group delimiter=" ">
               <text macro="second-position-creators"/>
-              <text variable="note"/>
+              <!-- <text variable="note"/> -->
             </group>
           </group>
           <text variable="edition"/>
           <text macro="publisher"/>
           <text macro="collection-number"/>
           <text macro="pages-or-volumes"/>
+		  <text macro="ISBN"/>
+          <text macro="offline"/>
           <choose>
             <if variable="accessed">
               <group delimiter=". – ">
@@ -529,8 +566,10 @@
         <group delimiter=". – " prefix="">
           <group delimiter=" // ">
             <group delimiter=" : ">
+              <text variable="container-title"  text-case="capitalize-first"/>
               <text macro="author-title"/>
               <text variable="genre"/>
+	    <text term="site"/>
             </group>
             <group delimiter=" ">
               <!--<text macro="second-position-authors-only"/>-->
