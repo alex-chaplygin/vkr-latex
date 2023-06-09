@@ -4,10 +4,12 @@
 Графический материал, выполненный на отдельных листах,
 изображен на рисунках А.1--А.10.
 
+\setbool{processfigure}{false} % отключение счетчика иллюстраций для плакатов
 \renewcommand{\thefigure}{А.\arabic{figure}} % шаблон номера рисунков
-
+\def\plpad{1.75cm}
 \begin{figure}
   \stepcounter{imglistcnt}
+  \vspace{\plpad}
   \begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
           Сведения о ВКРБ
       }\end{minipage}},rotate=90,center}
@@ -18,6 +20,7 @@
 
 \begin{figure}
   \stepcounter{imglistcnt}
+  \vspace{\plpad}
   \begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
           Цель и задачи разработки
       }\end{minipage}},rotate=90,center}
@@ -28,6 +31,7 @@
 
 \begin{figure}
   \stepcounter{imglistcnt}
+  \vspace{\plpad}
   \begin{adjustbox}{addcode={\begin{minipage}{\width}}{\caption{%
           Концептуальная модель сайта
       }\end{minipage}},rotate=90,center}
