@@ -27,12 +27,16 @@
 \renewcommand{\thetable}{\thesection.\arabic{table}} % шаблон номера таблиц
 \newcommand{\newsection}{\clearpage\setcounter{figure}{0}\setcounter{table}{0}} % начало нового раздела 
 \newcommand{\continuecaption}[1]{\caption*{#1}\\ \hline }
-\newcommand{\centertocsection}[1]{\phantomsection\section*{#1}\addcontentsline{toc}{section}{#1} }
+
+\makeatletter
+\newcommand{\centertocsection}{\@dblarg\ah@centertocsection}
+\def\ah@centertocsection[#1]#2{\phantomsection\section*{#1}\def\\{\relax\ifhmode\unskip\fi\space\ignorespaces}\addcontentsline{toc}{section}{#2}}
+\makeatother
 
 %\usepackage{longtable}
 \usepackage{xltabular}
 \usepackage{makecell}
-\usepackage{setspace}
+%\usepackage{setspace}
 \renewcommand\theadfont{}
 \newcolumntype{T}{>{\centering\arraybackslash}X} % новый тип столбца T - автоматическая ширина столбца с выравниванием по центру
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X} % новый тип столбца R - автоматическая ширина столбца с выравниванием по правому краю
@@ -44,6 +48,8 @@
 \usepackage{totcount}
 \newtotcounter{tablecnt}
 \newtotcounter{figurecnt}
+\newtotcounter{bibcnt}
+\newtotcounter{imglistcnt}
 
 \def\toppad{4mm}
 \def\tablepreskip{17.5pt}
@@ -55,7 +61,13 @@
 \setlength{\LTpre}{\tablepreskip}
 \setlength{\LTpost}{\tablebelowskip}
 
-\AtBeginEnvironment{xltabular}{\stepcounter{tablecnt}\renewcommand{\arraystretch}{\onehalflinespread}\linespread{1.0}\selectfont}
+\newbool{processtable}
+\setbool{processtable}{true}
+
+\newbool{processfigure}
+\setbool{processfigure}{true}
+
+\AtBeginEnvironment{xltabular}{\ifbool{processtable}{\stepcounter{tablecnt}\renewcommand{\arraystretch}{\onehalflinespread}\linespread{1.0}\selectfont}{\vspace{-13pt}}}
 
 \AtBeginEnvironment{longtable}{\stepcounter{tablecnt}\vspace{5pt}}
 \AfterEndEnvironment{longtable}{\vspace{7pt}}
@@ -242,7 +254,10 @@
 %
 % Закомментировать строку ниже
 %
-\BeforeBeginEnvironment{figure}{\stepcounter{figurecnt}\vspace{\figurepreskip}}
+\BeforeBeginEnvironment{figure}{\ifbool{processfigure}{\stepcounter{figurecnt}\vspace{\figurepreskip}}{}}
+
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{bibcnt}\oldbibitem}
 
 \newcommand{\fillcenter}[2][\fill]{%
 	\lhrulefill{#1}%
